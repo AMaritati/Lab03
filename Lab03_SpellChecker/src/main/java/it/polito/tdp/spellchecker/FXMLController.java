@@ -48,6 +48,8 @@ public class FXMLController {
     @FXML
     void doClearText(ActionEvent event) {
 
+    	txtTesto.clear();
+    	txtWrong.clear();
     }
 
     @FXML
