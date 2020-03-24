@@ -18,8 +18,8 @@ public class FXMLController {
     private URL location;
 
     @FXML
-    private ComboBox<?> comboBox;
-
+    private ComboBox<String> comboBox;
+    
     @FXML
     private TextArea txtTesto;
 
@@ -48,6 +48,12 @@ public class FXMLController {
 
     }
 
+    void insertLanguage() {
+    	comboBox.getItems().add("English");
+     	comboBox.getItems().add("Italiano");
+     	comboBox.setValue("English");
+    }
+    
     @FXML
     void initialize() {
         assert comboBox != null : "fx:id=\"comboBox\" was not injected: check your FXML file 'Scene.fxml'.";
@@ -57,6 +63,6 @@ public class FXMLController {
         assert txtWW != null : "fx:id=\"txtWW\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnClear != null : "fx:id=\"btnClear\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtCompleted != null : "fx:id=\"txtCompleted\" was not injected: check your FXML file 'Scene.fxml'.";
-
+        insertLanguage();
     }
 }
