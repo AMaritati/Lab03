@@ -6,13 +6,11 @@ import java.io.IOException;
 import java.util.*;
 
 public class Dictionary {
-	List<String> uk;
-	List<String> ita;
+	List<String> elenco;
 	RichWord parola;
 	
 	public Dictionary() {
-	uk = new ArrayList<String>();
-	ita = new ArrayList<String>();
+	elenco = new ArrayList<String>();
 	parola = new RichWord(null, null);
 	}
 	
@@ -23,13 +21,13 @@ public class Dictionary {
 	 */
 	public void loadDictionary(String language) throws IOException {
 		
-		if (language.equals("English")) {
+		
 		try {
-			FileReader fr = new FileReader("src/main/resources/English.txt");
+			FileReader fr = new FileReader("src/main/resources/"+language+".txt");
 			BufferedReader br = new BufferedReader(fr);
 			String word;
 			while ((word = br.readLine()) != null) {
-				uk.add(word);
+				elenco.add(word);
 			}
 			br.close();
 			
@@ -37,21 +35,6 @@ public class Dictionary {
 			System.out.println("Errore nella lettura del file");
 		    }
 		
-		}
-		else if (language.equals("Italian")) {
-			try {
-				FileReader fr = new FileReader("src/main/resources/Italian.txt");
-				BufferedReader br = new BufferedReader(fr);
-				String word;
-				while ((word = br.readLine()) != null) {
-					ita.add(word);
-				}
-				br.close();
-				
-			} catch (IOException e) {
-				System.out.println("Errore nella lettura del file");
-			}
-		}
 	}
 	
 	public List<RichWord> spellCheckText(List<String> inputTextList){
@@ -68,7 +51,7 @@ public class Dictionary {
 
 		for (i=0;i<N;i++) {
 		
-			for (String a : uk) {
+			for (String a : elenco) {
 			//comparare token con parola del dizionario
 			if (tokens[i].equals(a)) {
 				flag = true;}
