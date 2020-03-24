@@ -13,7 +13,7 @@ public class Dictionary {
 	public Dictionary() {
 	uk = new ArrayList<String>();
 	ita = new ArrayList<String>();
-	parola = new RichWord();
+	parola = new RichWord(null, null);
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class Dictionary {
 		
 		if (language.equals("English")) {
 		try {
-			FileReader fr = new FileReader("English.txt");
+			FileReader fr = new FileReader("src/main/resources/English.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String word;
 			while ((word = br.readLine()) != null) {
@@ -38,9 +38,9 @@ public class Dictionary {
 		    }
 		
 		}
-		else if (language.equals("Italiano")) {
+		else if (language.equals("Italian")) {
 			try {
-				FileReader fr = new FileReader("Italian.txt");
+				FileReader fr = new FileReader("src/main/resources/Italian.txt");
 				BufferedReader br = new BufferedReader(fr);
 				String word;
 				while ((word = br.readLine()) != null) {
@@ -55,20 +55,26 @@ public class Dictionary {
 	}
 	
 	public List<RichWord> spellCheckText(List<String> inputTextList){
+		String testo="";
+		boolean flag=false;
 		List<RichWord> temp = new ArrayList<RichWord>();
-		String testo = inputTextList.toString().toLowerCase();
-		testo.replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_'()\\[\\]\"]","");
-		String tokens[] = testo.split(" ");
-		int i = 0;
-		for (String a : uk) {
-			if (a.equals(tokens[i])) {
-				
-			}
+		for (String a : inputTextList) {
+			testo+=a.replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_'()\\[\\]\"]","");
 		}
+		testo.toLowerCase();
+		String tokens[] = testo.split(" ");
+		int N = tokens.length;
+		int i = 0;
+
+		for (i=0;i<N;i++) {
 		
-		
-		
-		
+			for (String a : uk) {
+			//comparare token con parola del dizionario
+			if (tokens[i].equals(a)) {
+				flag = true;}
+			}
+			temp.add(new RichWord (tokens[i],flag));
+		}
 		return temp;
 	}
 

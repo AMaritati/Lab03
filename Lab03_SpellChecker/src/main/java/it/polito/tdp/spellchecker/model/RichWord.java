@@ -2,12 +2,15 @@ package it.polito.tdp.spellchecker.model;
 
 public class RichWord {
 	private String word;
-	private Boolean isCorretta = true;
+	private Boolean isCorretta;
 	
-	public RichWord() {
+	public RichWord(String word, Boolean isCorretta) {
 		
+		this.word = word;
+		this.isCorretta = isCorretta;
 	}
-	
+
+
 	public String getWord() {
 		return word;
 	}

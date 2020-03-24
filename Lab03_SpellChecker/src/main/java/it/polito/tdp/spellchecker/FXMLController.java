@@ -48,9 +48,12 @@ public class FXMLController {
 
     }
 
+    /**
+     * Mi permette di scegliere la lingua da utilizzare.
+     */
     void insertLanguage() {
     	comboBox.getItems().add("English");
-     	comboBox.getItems().add("Italiano");
+     	comboBox.getItems().add("Italian");
      	comboBox.setValue("English");
     }
     
