@@ -5,8 +5,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 
@@ -19,13 +18,7 @@ public class FXMLController {
     private URL location;
 
     @FXML
-    private SplitMenuButton btnSplit;
-
-    @FXML
-    private MenuItem btnEnglish;
-
-    @FXML
-    private MenuItem btnIta;
+    private ComboBox<?> comboBox;
 
     @FXML
     private TextArea txtTesto;
@@ -48,18 +41,6 @@ public class FXMLController {
     @FXML
     void doClearText(ActionEvent event) {
 
-    	txtTesto.clear();
-    	txtWrong.clear();
-    }
-
-    @FXML
-    void doEnglish(ActionEvent event) {
-
-    }
-
-    @FXML
-    void doIta(ActionEvent event) {
-
     }
 
     @FXML
@@ -69,9 +50,7 @@ public class FXMLController {
 
     @FXML
     void initialize() {
-        assert btnSplit != null : "fx:id=\"btnSplit\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnEnglish != null : "fx:id=\"btnEnglish\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnIta != null : "fx:id=\"btnIta\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert comboBox != null : "fx:id=\"comboBox\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtTesto != null : "fx:id=\"txtTesto\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnSpell != null : "fx:id=\"btnSpell\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtWrong != null : "fx:id=\"txtWrong\" was not injected: check your FXML file 'Scene.fxml'.";
