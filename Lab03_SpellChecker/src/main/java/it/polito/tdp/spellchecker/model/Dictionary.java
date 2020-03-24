@@ -7,11 +7,11 @@ import java.util.*;
 
 public class Dictionary {
 	List<String> elenco;
-	RichWord parola;
+	
 	
 	public Dictionary() {
 	elenco = new ArrayList<String>();
-	parola = new RichWord(null, null);
+	
 	}
 	
 	/**
@@ -37,28 +37,27 @@ public class Dictionary {
 		
 	}
 	
-	public List<RichWord> spellCheckText(List<String> inputTextList){
-		String testo="";
-		boolean flag=false;
-		List<RichWord> temp = new ArrayList<RichWord>();
-		for (String a : inputTextList) {
-			testo+=a.replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_'()\\[\\]\"]","");
-		}
-		testo.toLowerCase();
-		String tokens[] = testo.split(" ");
-		int N = tokens.length;
-		int i = 0;
-
-		for (i=0;i<N;i++) {
+	public List<String> StringToList (String testo) {
 		
-			for (String a : elenco) {
-			//comparare token con parola del dizionario
-			if (tokens[i].equals(a)) {
-				flag = true;}
-			}
-			temp.add(new RichWord (tokens[i],flag));
+			testo.replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_'()\\[\\]\"]","");
+			testo.toLowerCase();
+			String tokens[] = testo.split(" ");
+			List<String> list = Arrays.asList(tokens);
+		
+			return list;
+	}
+	
+	public List<RichWord> spellCheckText(List<String> inputTextList){
+		boolean flag=false;
+		List<RichWord> lista = new ArrayList<RichWord>();
+		for(String a : elenco) {
+			for (String b : inputTextList) {
+				if ( a.equals(b)) {
+					flag = true;
+					lista.add(new RichWord (b,flag));}
 		}
-		return temp;
+			}
+		return lista;
 	}
 
 }
