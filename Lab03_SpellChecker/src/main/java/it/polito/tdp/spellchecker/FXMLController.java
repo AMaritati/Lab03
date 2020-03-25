@@ -2,7 +2,6 @@ package it.polito.tdp.spellchecker;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -16,7 +15,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 
 public class FXMLController {
-	Dictionary d;
 	
 
     @FXML
@@ -52,18 +50,18 @@ public class FXMLController {
     	txtWrong.clear();
     	txtWW.setText("");
     	txtCompleted.setText("");
-
     }
 
     @FXML
     void doSpellCheck(ActionEvent event) throws IOException {
-    	
+    	Dictionary d;
+    	d = new Dictionary();
     	// carico dizionario corretto
     	d.loadDictionary(comboBox.getValue());
 
     	// faccio il controllo sul testo in input
     	
-    	String input = txtTesto.getText().toLowerCase();//replaceAll
+    	String input = txtTesto.getText().toLowerCase().replaceAll("[.,\\/#!?$%\\^&\\*;:{}=\\-_'()\\[\\]\"]","");
     	double start = System.nanoTime();  //per studiare performance
     	List<RichWord> rw = d.spellCheckText(input.split(" "));
     	double stop = System.nanoTime();
@@ -81,9 +79,6 @@ public class FXMLController {
     	txtWrong.setText(wrong);
     	txtWW.setText("The text contains "+i+" errors");
     	txtCompleted.setText("Spell check completed in "+(stop-start)+" milliseconds");
-    	
-    	
-
     }
 
     /**
@@ -105,6 +100,6 @@ public class FXMLController {
         assert btnClear != null : "fx:id=\"btnClear\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtCompleted != null : "fx:id=\"txtCompleted\" was not injected: check your FXML file 'Scene.fxml'.";
         insertLanguage();
-        d = new Dictionary();
+        
     }
 }
