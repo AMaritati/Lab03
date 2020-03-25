@@ -37,26 +37,24 @@ public class Dictionary {
 		
 	}
 	
-	public List<String> StringToList (String testo) {
-		
-			testo.replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_'()\\[\\]\"]","");
-			testo.toLowerCase();
-			String tokens[] = testo.split(" ");
-			List<String> list = Arrays.asList(tokens);
-		
-			return list;
+	
+	public String cercaParola (String parola) {
+		for (String s:elenco) 
+			if(parola.equals(s))
+				return s;
+		return null;
 	}
 	
-	public List<RichWord> spellCheckText(List<String> inputTextList){
-		boolean flag=false;
+	public List<RichWord> spellCheckText(String[] inputTextList){
+		
 		List<RichWord> lista = new ArrayList<RichWord>();
-		for(String a : elenco) {
-			for (String b : inputTextList) {
-				if ( a.equals(b)) {
-					flag = true;
-					lista.add(new RichWord (b,flag));}
-		}
-			}
+		
+			for (String s : inputTextList) {
+				if ( cercaParola(s)!=null) 
+					lista.add(new RichWord(s,true));
+				else
+					lista.add(new RichWord(s,false));
+			}			
 		return lista;
 	}
 

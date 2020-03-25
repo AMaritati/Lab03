@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
 
 public class FXMLController {
 	Dictionary d;
-	int i = 0;
+	
 
     @FXML
     private ResourceBundle resources;
@@ -57,21 +57,28 @@ public class FXMLController {
 
     @FXML
     void doSpellCheck(ActionEvent event) throws IOException {
-    	List<String> temp = new ArrayList<String>();
-    	List<RichWord> rw = new ArrayList<RichWord>();
-    	double start = System.nanoTime();  //per studiare performance
+    	
+    	// carico dizionario corretto
     	d.loadDictionary(comboBox.getValue());
-    	temp = d.StringToList(txtTesto.getText());
-    	rw = d.spellCheckText(temp);
+
+    	// faccio il controllo sul testo in input
+    	
+    	String input = txtTesto.getText().toLowerCase();//replaceAll
+    	double start = System.nanoTime();  //per studiare performance
+    	List<RichWord> rw = d.spellCheckText(input.split(" "));
+    	double stop = System.nanoTime();
+    	//inizializzazione errori
+    	String wrong = "";
+    	int i = 0;
     	
     	//cerco se ci sono parole sbagliate
     	for (RichWord r : rw) {
     		if (r.getIsCorretta()==false) {
-    			txtWrong.appendText(r.getWord()+"\n");
+    			wrong += r.getWord()+"\n";
     			i++;
     		}
     	}
-    	double stop = System.nanoTime();
+    	txtWrong.setText(wrong);
     	txtWW.setText("The text contains "+i+" errors");
     	txtCompleted.setText("Spell check completed in "+(stop-start)+" milliseconds");
     	
